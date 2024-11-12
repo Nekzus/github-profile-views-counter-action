@@ -15781,7 +15781,7 @@ let yearGraph = (function () {
         let countData = [];
         if(year.status){
             for(const view of year.views){
-              labels.push('"' + view.timestamp.getFullYear() + '/' + view.timestamp.getMonth() + '"');
+                labels.push('"' + view.timestamp.getFullYear() + '/' + view.timestamp.getMonth() + '"');
                 uniqueData.push(view.uniques);
                 countData.push(view.count);
             }
@@ -15794,6 +15794,7 @@ let yearGraph = (function () {
     };
 })();
 module.exports = yearGraph;
+
 
 /***/ }),
 
@@ -15976,13 +15977,13 @@ let markdownTemplate = function () {
     const AUTHOR_URL = 'https://github.com/gayanvoice';
     let getDate = function () {
         let date = new Date();
-        let time = date.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', minute: 'numeric', hour12: true })
-        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} UTC`
-    }
+        let time = date.toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', hour: 'numeric', minute: 'numeric', hour12: true })
+        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} ART`
+    }    
     let formatDate = function (timestamp) {
         let date = new Date(timestamp);
-        let time = date.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', minute: 'numeric', hour12: true })
-        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} UTC`
+        let time = date.toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', hour: 'numeric', minute: 'numeric', hour12: true });
+        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} ART`;
     }
     let footerComponent = function (actionName, actionUrl, authorName, authorUrl) {
         let markdown =  `[**Set up ${actionName} for your repositories**](${actionUrl})\n`;
