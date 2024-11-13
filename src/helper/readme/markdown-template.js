@@ -5,13 +5,13 @@ let markdownTemplate = function () {
     const AUTHOR_NAME = 'gayanvoice';
     const AUTHOR_URL = 'https://github.com/gayanvoice';
     let getDate = function () {
-        let options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+        let options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
         let date = new Intl.DateTimeFormat('es-AR', options).format(new Date());
         return `${date} ART`;
     }
     
     let formatDate = function (timestamp) {
-        let options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+        let options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
         let date = new Intl.DateTimeFormat('es-AR', options).format(new Date(timestamp));
         return `${date} ART`;
     }
