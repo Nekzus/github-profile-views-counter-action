@@ -5,19 +5,19 @@ let markdownTemplate = function () {
     const AUTHOR_NAME = 'gayanvoice';
     const AUTHOR_URL = 'https://github.com/gayanvoice';
     let getDate = function () {
-        let options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: false };
-        let date = new Date().toLocaleString('en-US', options);
-        let [datePart, timePart] = date.split(', ');
-        let formattedDate = datePart.replace(/(\d+)-(\d+)-(\d+)/, '$1/$2/$3');
-        return `${formattedDate} ${timePart} ART`;
+        let date = new Date();
+        let options = { timeZone: 'America/Argentina/Buenos_Aires', hour: 'numeric', minute: 'numeric', hour12: false };
+        let time = date.toLocaleString('en-US', options);
+        let formattedDate = `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
+        return `${formattedDate} ${time} ART`;
     }
     
     let formatDate = function (timestamp) {
-        let options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: false };
-        let date = new Date(timestamp).toLocaleString('en-US', options);
-        let [datePart, timePart] = date.split(', ');
-        let formattedDate = datePart.replace(/(\d+)-(\d+)-(\d+)/, '$1/$2/$3');
-        return `${formattedDate} ${timePart} ART`;
+        let date = new Date(timestamp);
+        let options = { timeZone: 'America/Argentina/Buenos_Aires', hour: 'numeric', minute: 'numeric', hour12: false };
+        let time = date.toLocaleString('en-US', options);
+        let formattedDate = `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
+        return `${formattedDate} ${time} ART`;
     }
     let footerComponent = function (actionName, actionUrl, authorName, authorUrl) {
         let markdown =  `[**Set up ${actionName} for your repositories**](${actionUrl})\n`;
