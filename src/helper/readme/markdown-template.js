@@ -5,15 +5,15 @@ let markdownTemplate = function () {
     const AUTHOR_NAME = 'gayanvoice';
     const AUTHOR_URL = 'https://github.com/gayanvoice';
     let getDate = function () {
-        let date = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" }));
-        let time = date.toLocaleString('es-AR', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Argentina/Buenos_Aires' });
-        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} ART`;
+        let options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+        let date = new Intl.DateTimeFormat('es-AR', options).format(new Date());
+        return `${date} ART`;
     }
     
     let formatDate = function (timestamp) {
-        let date = new Date(new Date(timestamp).toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" }));
-        let time = date.toLocaleString('es-AR', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Argentina/Buenos_Aires' });
-        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} ART`;
+        let options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+        let date = new Intl.DateTimeFormat('es-AR', options).format(new Date(timestamp));
+        return `${date} ART`;
     }
     let footerComponent = function (actionName, actionUrl, authorName, authorUrl) {
         let markdown =  `[**Set up ${actionName} for your repositories**](${actionUrl})\n`;
