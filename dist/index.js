@@ -15976,13 +15976,14 @@ let markdownTemplate = function () {
     const AUTHOR_NAME = 'gayanvoice';
     const AUTHOR_URL = 'https://github.com/gayanvoice';
     let getDate = function () {
-        let date = new Date();
-        let time = date.toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', hour: 'numeric', minute: 'numeric', hour12: true })
-        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} ART`
-    }    
+        let date = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" }));
+        let time = date.toLocaleString('es-AR', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Argentina/Buenos_Aires' });
+        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} ART`;
+    }
+    
     let formatDate = function (timestamp) {
-        let date = new Date(timestamp);
-        let time = date.toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', hour: 'numeric', minute: 'numeric', hour12: true });
+        let date = new Date(new Date(timestamp).toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" }));
+        let time = date.toLocaleString('es-AR', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Argentina/Buenos_Aires' });
         return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} ART`;
     }
     let footerComponent = function (actionName, actionUrl, authorName, authorUrl) {
