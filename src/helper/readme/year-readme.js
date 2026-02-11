@@ -1,15 +1,17 @@
-const markdownTemplate = require('./markdown-template');
-const markdownFile = require('../file/markdown-file');
-const yearCache = require('../../helper/cache/year-cache');
-let yearReadme = (function () {
-    const YEAR = 'year';
-    let updateYearMarkDownFile = async function (response, request) {
-        let year = await yearCache.readYearCacheFile(response.repositoryId);
-        let object = await markdownTemplate.createListMarkDownTemplate(year.views, 'Year', response, request)
-        await markdownFile.createListMarkDownFile(response.repositoryId, YEAR, object);
-    }
-    return {
-        updateYearMarkDownFile: updateYearMarkDownFile
-    };
+import yearCache from "../../helper/cache/year-cache.js";
+import markdownFile from "../file/markdown-file.js";
+import markdownTemplate from "./markdown-template.js";
+
+const yearReadme = (() => {
+	const YEAR = "year";
+	const updateYearMarkDownFile = async (response, request) => {
+		const year = await yearCache.readYearCacheFile(response.repositoryId);
+		const object = await markdownTemplate.createListMarkDownTemplate(year.views, "Year", response, request);
+		await markdownFile.createListMarkDownFile(response.repositoryId, YEAR, object);
+	};
+	return {
+		updateYearMarkDownFile: updateYearMarkDownFile,
+	};
 })();
-module.exports = yearReadme;
+
+export default yearReadme;

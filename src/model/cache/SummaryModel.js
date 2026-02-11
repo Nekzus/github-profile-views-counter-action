@@ -1,5 +1,6 @@
-let SummaryModel =  function (uniques, count) {
-    this.uniques = uniques;
-    this.count = count;
-}
-module.exports = SummaryModel;
+const SummaryModel = function (uniques, count) {
+	this.uniques = uniques;
+	this.count = count;
+};
+
+export default SummaryModel;

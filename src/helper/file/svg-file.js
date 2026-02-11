@@ -1,17 +1,19 @@
-const file = require('../../core/file');
-let svgFile = (function () {
-    const SVG = 'svg';
-    let createBadgeSVGFile = async function (repositoryName, fileName, object) {
-        let path = `${SVG}/${repositoryName}/${fileName}.svg`;
-        await file.createOtherFile(path, object);
-    }
-    let createProfileSVGFile = async function (object) {
-        let path = `${SVG}/profile/badge.svg`;
-        await file.createOtherFile(path, object);
-    }
-    return {
-        createBadgeSVGFile: createBadgeSVGFile,
-        createProfileSVGFile: createProfileSVGFile
-    };
+import file from "../../core/file.js";
+
+const svgFile = (() => {
+	const SVG = "svg";
+	const createBadgeSVGFile = async (repositoryName, fileName, object) => {
+		const path = `${SVG}/${repositoryName}/${fileName}.svg`;
+		await file.createOtherFile(path, object);
+	};
+	const createProfileSVGFile = async (object) => {
+		const path = `${SVG}/profile/badge.svg`;
+		await file.createOtherFile(path, object);
+	};
+	return {
+		createBadgeSVGFile: createBadgeSVGFile,
+		createProfileSVGFile: createProfileSVGFile,
+	};
 })();
-module.exports = svgFile;
+
+export default svgFile;

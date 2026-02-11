@@ -1,15 +1,17 @@
-const markdownTemplate = require('./markdown-template');
-const markdownFile = require('../file/markdown-file');
-const monthCache = require('../../helper/cache/month-cache');
-let weekReadme = (function () {
-    const MONTH = 'month';
-    let updateMonthMarkDownFile = async function (response, request) {
-        let month = await monthCache.readMonthCacheFile(response.repositoryId);
-        let object = await markdownTemplate.createListMarkDownTemplate(month.views, 'Month', response, request)
-        await markdownFile.createListMarkDownFile(response.repositoryId, MONTH, object);
-    }
-    return {
-        updateMonthMarkDownFile: updateMonthMarkDownFile
-    };
+import monthCache from "../../helper/cache/month-cache.js";
+import markdownFile from "../file/markdown-file.js";
+import markdownTemplate from "./markdown-template.js";
+
+const monthReadme = (() => {
+	const MONTH = "month";
+	const updateMonthMarkDownFile = async (response, request) => {
+		const month = await monthCache.readMonthCacheFile(response.repositoryId);
+		const object = await markdownTemplate.createListMarkDownTemplate(month.views, "Month", response, request);
+		await markdownFile.createListMarkDownFile(response.repositoryId, MONTH, object);
+	};
+	return {
+		updateMonthMarkDownFile: updateMonthMarkDownFile,
+	};
 })();
-module.exports = weekReadme;
+
+export default monthReadme;

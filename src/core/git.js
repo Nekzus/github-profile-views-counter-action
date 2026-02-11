@@ -1,22 +1,24 @@
-const simpleGit = require('simple-git');
-let git = (function () {
-    const git = simpleGit();
-    let pull = async function () {
-        await git.pull();
-    }
-    let commit = async function (username, email, message) {
-        await git.addConfig('user.name', username)
-        await git.addConfig('user.email', email)
-        await git.add('./*')
-        await git.commit(message)
-    }
-    let push = async function (branch) {
-        await git.push('origin', branch);
-    }
-    return {
-        pull: pull,
-        commit: commit,
-        push: push
-    };
+import simpleGit from "simple-git";
+
+const git = (() => {
+	const gitInstance = simpleGit();
+	const pull = async () => {
+		await gitInstance.pull();
+	};
+	const commit = async (username, email, message) => {
+		await gitInstance.addConfig("user.name", username);
+		await gitInstance.addConfig("user.email", email);
+		await gitInstance.add("./*");
+		await gitInstance.commit(message);
+	};
+	const push = async (branch) => {
+		await gitInstance.push("origin", branch);
+	};
+	return {
+		pull: pull,
+		commit: commit,
+		push: push,
+	};
 })();
-module.exports = git;
+
+export default git;

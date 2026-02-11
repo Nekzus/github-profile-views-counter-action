@@ -1,6 +1,6 @@
-let svgFile = (function () {
-    let template = `<svg xmlns="http://www.w3.org/2000/svg"
-     width="115" height="20" role="img" aria-label="Maintained?: yes">
+const svgFile = (() => {
+	const template = `<svg xmlns="http://www.w3.org/2000/svg"
+      width="115" height="20" role="img" aria-label="Maintained?: yes">
     <title>Maintained?: yes</title>
     <linearGradient id="s" x2="0" y2="100%">
         <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
@@ -19,11 +19,12 @@ let svgFile = (function () {
         <text x="825" y="140" transform="scale(.1)" fill="#fff">{views}</text>
     </g>
 </svg>`;
-    let create = async function (views) {
-        return template.replace('{views}', views);
-    }
-    return {
-        create: create
-    };
+	const create = async (views) => {
+		return template.replace("{views}", views);
+	};
+	return {
+		create: create,
+	};
 })();
-module.exports = svgFile
+
+export default svgFile;

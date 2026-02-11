@@ -1,30 +1,32 @@
-const range = require('../../core/range');
-const record = require('../../core/record');
-const recordCacheFile = require('../../helper/cache/record-cache');
-const jsonFile = require('../../helper/file/json-file');
-let monthCache = (function () {
-    const DAYS = 30;
-    const MONTH = 'month';
-    let createViews = function (records) {
-        let month = [];
-        for (const date of range.getDates(DAYS)) {
-            month.push(record.createDailyRecord(date, records))
-        }
-        return month;
-    }
-    let readMonthCacheFile = async function (repositoryName) {
-        return await jsonFile.readCacheFile(repositoryName, MONTH);
-    }
-    let updateMonthCacheFile = async function (repositoryName) {
-        let records = await recordCacheFile.readRecordCacheFile(repositoryName);
-        if (records.status) {
-            let monthViews = createViews(records);
-            await jsonFile.createCacheFile(repositoryName, MONTH, monthViews)
-        }
-    }
-    return {
-        updateMonthCacheFile: updateMonthCacheFile,
-        readMonthCacheFile: readMonthCacheFile
-    };
+import range from "../../core/range.js";
+import record from "../../core/record.js";
+import recordCacheFile from "../../helper/cache/record-cache.js";
+import jsonFile from "../../helper/file/json-file.js";
+
+const monthCache = (() => {
+	const DAYS = 30;
+	const MONTH = "month";
+	const createViews = (records) => {
+		const month = [];
+		for (const date of range.getDates(DAYS)) {
+			month.push(record.createDailyRecord(date, records));
+		}
+		return month;
+	};
+	const readMonthCacheFile = async (repositoryName) => {
+		return await jsonFile.readCacheFile(repositoryName, MONTH);
+	};
+	const updateMonthCacheFile = async (repositoryName) => {
+		const records = await recordCacheFile.readRecordCacheFile(repositoryName);
+		if (records.status) {
+			const monthViews = createViews(records);
+			await jsonFile.createCacheFile(repositoryName, MONTH, monthViews);
+		}
+	};
+	return {
+		updateMonthCacheFile: updateMonthCacheFile,
+		readMonthCacheFile: readMonthCacheFile,
+	};
 })();
-module.exports = monthCache;
+
+export default monthCache;

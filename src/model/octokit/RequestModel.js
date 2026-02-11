@@ -1,6 +1,7 @@
-let RequestModel = function (url, username, repository) {
-    this.url = url;
-    this.username = username;
-    this.repository = repository;
-}
-module.exports = RequestModel;
+const RequestModel = function (url, username, repository) {
+	this.url = url;
+	this.username = username;
+	this.repository = repository;
+};
+
+export default RequestModel;

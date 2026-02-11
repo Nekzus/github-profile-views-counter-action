@@ -1,25 +1,27 @@
-const graphFile = require('../file/graph-file');
-const monthCache = require('../../helper/cache/month-cache');
-const GraphFileModel = require('../../model/file/GraphFileModel');
-let monthGraph = (function () {
-    const filename = 'month'
-    let updateMonthGraphFile = async function (response) {
-        let month = await monthCache.readMonthCacheFile(response.repositoryId);
-        let labels = [];
-        let uniqueData = [];
-        let countData = [];
-        if(month.status){
-            for(const view of month.views){
-                labels.push('"' + (view.timestamp.getMonth() + 1) + '/' + view.timestamp.getDate() + '"');
-                uniqueData.push(view.uniques);
-                countData.push(view.count);
-            }
-        }
-        let graph = new GraphFileModel(labels, uniqueData, countData);
-        await graphFile.createGraphFile(response.repositoryId, filename, graph);
-    }
-    return {
-        updateMonthGraphFile: updateMonthGraphFile
-    };
+import monthCache from "../../helper/cache/month-cache.js";
+import GraphFileModel from "../../model/file/GraphFileModel.js";
+import graphFile from "../file/graph-file.js";
+
+const monthGraph = (() => {
+	const filename = "month";
+	const updateMonthGraphFile = async (response) => {
+		const month = await monthCache.readMonthCacheFile(response.repositoryId);
+		const labels = [];
+		const uniqueData = [];
+		const countData = [];
+		if (month.status) {
+			for (const view of month.views) {
+				labels.push(`"${view.timestamp.getMonth() + 1}/${view.timestamp.getDate()}"`);
+				uniqueData.push(view.uniques);
+				countData.push(view.count);
+			}
+		}
+		const graph = new GraphFileModel(labels, uniqueData, countData);
+		await graphFile.createGraphFile(response.repositoryId, filename, graph);
+	};
+	return {
+		updateMonthGraphFile: updateMonthGraphFile,
+	};
 })();
-module.exports = monthGraph;
+
+export default monthGraph;
